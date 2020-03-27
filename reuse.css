@@ -1,0 +1,129 @@
+/* ==========================
+                         --Specificity--
+
+     universal selector * has low specificity
+     ID has high specificity
+
+     inline = 1000
+     id = 100
+     class, attribute, pseudo class = 10
+     element name, pseudo element = 1
+
+ ========================== */
+
+
+/* ==========================
+                    Custom Variable
+
+     var() used to insert variable
+     global scope u can use either 
+          :root
+          body
+     variable name must start with --
+
+     :root{
+          --color: red;
+     }
+
+     #id{
+          color: var(--color);
+     }
+
+============================= */
+
+
+/*============================
+                    Media Query Order
+
+     min-width low to high
+                    800
+                    900
+                    1000
+                    1100
+                    1700
+                    1800
+
+     max-width high to low
+                    768
+                    450
+                    320
+
+============================== */
+
+
+/* ================================
+-webkit- 		
+-ms-
+-moz-
+
+-webkit-transition
+-ms-transition
+-moz-transition
+-o-transition
+
+=================================== */
+
+
+/* ====================================
+                    ordering css
+
+     always order css in alphabatical
+
+
+===================================== */
+
+
+@keyframes bounce{
+     0%, 20%, 50%, 80%, 100%{
+          -moz-transform: translateY(0);
+          -ms-transform: translateY(0);
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+     }
+     40%{
+          -moz-transform: translateY(-30px);
+          -ms-transform: translateY(-30px);
+          -webkit-transform: translateY(-30px);
+          transform: translateY(-30px);
+     }
+     60%{
+          -moz-transform: translateY(-15px);
+          -ms-transform: translateY(-15px);
+          -webkit-transform: translateY(-15px);
+          transform: translateY(-15px);
+     }
+}
+
+.hi{
+     -moz-animation: bounce 2s infinite;
+     -webkit-animation: bounce 2s infinite;
+     animation: bounce 2s infinite;
+}
+
+/*==================
+          Slick Text Select
+=================== */
+
+.slick-slider {
+     -webkit-user-select: text;
+     -khtml-user-select: text;
+     -moz-user-select: text;
+     -ms-user-select: text;
+     user-select: text;
+}
+
+/*=========================
+     Select icon Remove
+=========================== */
+
+select{
+     -webkit-appearance: none;
+     -moz-appearance: none;
+}
+
+select{
+     -webkit-appearance: none;
+    background: #fff url(images/down-arrow.png) no-repeat 98%;
+    width: 100%;
+    padding: 0.5rem;
+}
