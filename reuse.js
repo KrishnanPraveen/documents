@@ -1,22 +1,25 @@
 /*======================
+    Scroll to Element
+======================= */
+$('a.now').click(function() {
+    $('html, body').animate({
+    scrollTop: $("#form").offset().top
+    }, 2000)
+});
+
+/*======================
     Scroll to Top
 ======================= */
+$('.top').click(function() {
+    $('html, body').animate({
+    scrollTop: 0
+    }, 2000)
+});
 
-$('a.now').click(function() {
-     $('html, body').animate({
-     scrollTop: $("#form").offset().top
-     }, 2000)
- });
-
- $('.top').click(function() {
-     $('html, body').animate({
-     scrollTop: 0
-     }, 2000)
- });
-
- /* scroll to top button hide & show */
-
- $(window).scroll(function() {
+/*==========================
+    Scroll Btn Hide & Show
+============================ */
+$(window).scroll(function() {
     if ($(this).scrollTop() > 150) {
       $(".site-header").addClass("sticky");
       $("#toTop").fadeIn();
@@ -24,13 +27,12 @@ $('a.now').click(function() {
       $(".site-header").removeClass("sticky");
       $("#toTop").fadeOut();
     }
-  });
+});
 
- /*======================
+/*=============================
     Slick initalize & Unslick 
     particular view port
-======================= */
- 
+=============================== */
 slick_on_mobile( $('.testi-quotes'));
 
 function slick_on_mobile(slider){
@@ -56,7 +58,6 @@ function slick_on_mobile(slider){
 /*======================
     Form Validation
 ======================= */
-
 function valid_name(value) {
     var valid = /^[a-zA-Z ]*$/;
     return valid.test(value);
@@ -72,7 +73,7 @@ function ValidatePhoneNumber(telephone) {
     return telephone.length != 10 ? false : reg.test(telephone);
 }
   
-$(' .form-group input[name="your-email"]').keyup(function() {
+$('input[name="your-email"]').keyup(function() {
     var value = $(this).val();
     var valid = validateEmail(value);
 
@@ -95,3 +96,108 @@ $(".form-group input.wpcf7-form-control").on("focus blur", function() {
         $(this).parents(".form-group").toggleClass("focused");
     }
 });
+
+
+/*=========================
+    Sticky Section
+===========================*/
+function sticky_relocate() {
+    var sticky_foot = $(".sticky-bottom");
+    var win = $(window);
+    var a = sticky_foot.offset().top;
+    var b = sticky_foot.height();
+    var c = win.height();
+    var d = win.scrollTop();
+    var e = d + win.innerHeight();
+    var f = a + sticky_foot.outerHeight();
+    if (((e > a) && (d < f)) || ($(window).scrollTop() >= 100) ){
+        $('.blog-strip').addClass('scrollUp');
+    }
+    if (((c+d)>(a+b)) || ($(window).scrollTop() <= 200)) {
+        $('.blog-strip').removeClass('scrollUp');
+    }
+}
+sticky_relocate();
+  
+$(window).scroll(function(){
+    sticky_relocate();
+});
+
+
+/*=================================
+    Auto Pop-Up Certain Time Delay
+===================================*/
+$(window).on('load', function(){
+    function showwindow(){
+      $("#pop-up").show();
+      $('#pop-initial').css('overflow','hidden');
+      $('.wrapper').addClass('pop-up');
+    }
+    function hidewindow(){
+      $("#pop-up").hide();
+      $('#pop-initial').css('overflow','unset');
+    }
+    setTimeout(showwindow,10000);
+    $(".close-pop-up").click(function(){
+      hidewindow();
+      $('.wrapper').removeClass('pop-up');
+    });
+});
+
+
+/*=====================
+    Sticky NavBar
+=======================*/
+function sticky(navbar) {
+    var c, currentScrollTop = 0;
+
+    $(window).scroll(function () {
+        var a = $(window).scrollTop();
+        var b = navbar.height();
+        currentScrollTop = a;
+
+        if (c < currentScrollTop && a > b + b) {
+            navbar.addClass("scrollUp");
+        } else if (c > currentScrollTop && !(a <= b)) {
+            navbar.removeClass("scrollUp");
+        }
+        c = currentScrollTop;
+    });
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 1) {
+            navbar.addClass('fixed-header');
+        }
+        else {
+            navbar.removeClass('fixed-header');
+        }
+    });
+}
+sticky($('.site-header'));
+
+
+/*=================
+    Page Progress
+===================*/
+<progress id="progressbar" value="0" max="100"></progress>
+
+$(window).scroll(function () {
+    var s = $(window).scrollTop(),
+        d = $(document).height(),
+        c = $(window).height();
+        scrollPercent = (s / (d-c)) * 100;
+        var position = scrollPercent;
+    $("#progressbar").attr('value', position);
+});
+
+
+/*===================================
+    Background Image Using data-bg
+=====================================*/
+function dataBg(imgcontainer) {
+    $(imgcontainer).each(function() {
+        var img = $(this).data('bg');
+        $(this).css({"background-image": "url(" + img + ")"});
+    })
+}
+dataBg('.our-works-banner .item');
